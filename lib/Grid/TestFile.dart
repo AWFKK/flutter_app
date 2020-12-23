@@ -152,7 +152,7 @@ class _TabsDemoState extends State<TestFile> {
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15.0),
+          borderRadius: BorderRadius.circular(5.0),
         ),
         child: Container(
           decoration: BoxDecoration(
@@ -165,20 +165,29 @@ class _TabsDemoState extends State<TestFile> {
           ),
           child: Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(5.0),
+              ),
               color: Colors.white.withOpacity(0.5),
-              padding: const EdgeInsets.fromLTRB(5,2,0,0),
+              margin: const EdgeInsets.fromLTRB(0,0,0,0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text(name, style: TextStyle(fontSize: 15)),
-                  Text("Quantity", style: TextStyle(fontSize: 15)),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(5,2,0,0),
+                    child: Text(name, style: TextStyle(fontSize: 15)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(5,0,0,0),
+                    child: Text("Quantity", style: TextStyle(fontSize: 13)),
+                  ),
                   Align(
                     alignment: Alignment.bottomRight,
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("Price", style: TextStyle(fontSize: 15)),
+                      padding: const EdgeInsets.fromLTRB(0,0,5,5),
+                      child: Text("AED:25.00", style: TextStyle(fontSize: 15)),
                     ),
                   )
 
