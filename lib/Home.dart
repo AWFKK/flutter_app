@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/FatchData.dart';
 import 'package:flutter_app/Grid/TestFile.dart';
+import 'package:flutter_app/SendData.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -67,6 +69,44 @@ class _HomeState extends State<Home> {
                       context,
                       MaterialPageRoute(builder: (context) =>
                           TestFile()), // Passing Intent With InputString
+                    );
+                  }
+              )
+          ),
+
+          //CallService
+          new Container(
+              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: RaisedButton(
+                  child: Text('Get'),
+                  textColor: Colors.white,
+                  color: HexColor('#D91400'),
+                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  onPressed: () {
+                    //Intent Next Activity
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          FatchData()), // Passing Intent With InputString
+                    );
+                  }
+              )
+          ),
+
+          //Send Data
+          new Container(
+              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: RaisedButton(
+                  child: Text('Send'),
+                  textColor: Colors.white,
+                  color: HexColor('#D91400'),
+                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  onPressed: () {
+                    //Intent Next Activity
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          SendData()), // Passing Intent With InputString
                     );
                   }
               )
