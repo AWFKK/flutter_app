@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/FatchData.dart';
+import 'file:///C:/Users/Faiz/Desktop/Projects/flutter_app/lib/WebService/FatchData.dart';
 import 'package:flutter_app/Grid/TestFile.dart';
-import 'package:flutter_app/SendData.dart';
+import 'file:///C:/Users/Faiz/Desktop/Projects/flutter_app/lib/WebService/SendData.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:hexcolor/hexcolor.dart';
 
