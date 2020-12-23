@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
+import 'package:hexcolor/hexcolor.dart';
 
 import '../AppTheme.dart';
 import 'Product_Categories.dart';
@@ -75,6 +76,14 @@ class _TabsDemoState extends State<TestFile> {
             child: new Scaffold(
                 appBar: new AppBar(
                   title: new Text("Sub Categories"),
+                  leading: GestureDetector(
+                    child: Icon(
+                      Icons.arrow_back_ios_outlined,  // add custom icons also
+                    ),
+                    onTap: (){
+                        Navigator.pop(context);
+                    },
+                  ),
                   bottom: new TabBar(
                     isScrollable: true,
                     tabs: List<Widget>.generate(categories.length, (int index) {
@@ -84,14 +93,6 @@ class _TabsDemoState extends State<TestFile> {
 
                   ),
                 ),
-
-                /*body: new TabBarView(
-                  children: List<Widget>.generate(
-                      categories.length, (int index) {
-                    print(categories[0]);
-                    return  _subCategory(index);
-                  }),
-                )*/
 
                 body: FutureBuilder(
                   future: getAllData(),
@@ -125,10 +126,22 @@ class _TabsDemoState extends State<TestFile> {
                                   toastLength: Toast.LENGTH_SHORT,
                                   gravity: ToastGravity.BOTTOM_LEFT,
                                   timeInSecForIosWeb: 1,
-                                  backgroundColor: Colors.red,
+                                  backgroundColor: HexColor('#D91400'),
                                   textColor: Colors.white,
                                   fontSize: 16.0);
 
+                                },
+                                onDoubleTap: ()
+                                {
+                                  Fluttertoast.showToast(
+                                      msg: 'Double Tap',
+                                      //Message For toast
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM_LEFT,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.red,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0);
                                 },
                               );
                             }),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/Grid/TestFile.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 import 'Grid/Category_List.dart';
 
@@ -30,7 +31,7 @@ class _HomeState extends State<Home> {
               child: RaisedButton(
                   child: Text('Start'),
                   textColor: Colors.white,
-                  color: Colors.blue,
+                  color: HexColor('#D91400'),
                   padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
                   onPressed: () {
                     //Intent Next Activity
@@ -58,7 +59,7 @@ class _HomeState extends State<Home> {
               child: RaisedButton(
                   child: Text('Test File'),
                   textColor: Colors.white,
-                  color: Colors.blue,
+                  color: HexColor('#D91400'),
                   padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
                   onPressed: () {
                     //Intent Next Activity
