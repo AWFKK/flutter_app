@@ -24,6 +24,9 @@ class _TabsDemoState extends State<TestFile> {
 
   bool multiple = true;
   int count = 0;
+  int a ;
+
+  bool addedToCart = false;
 
   List<String> categories = ["0","1","2"];
   //Its A faction type
@@ -62,12 +65,20 @@ class _TabsDemoState extends State<TestFile> {
     return listof;
   }
 
-  changeText() {
+  changeText(int index) {
     setState(() {
       count++;
+      addedToCart = true;
     });
-
   }
+
+  remove(int index) {
+    setState(() {
+      count = 0;
+      addedToCart = false;
+    });
+  }
+
 
   @override
   void initState() {
@@ -118,7 +129,7 @@ class _TabsDemoState extends State<TestFile> {
                               return InkWell(
                                 child: Padding(
                                   padding: const EdgeInsets.all(1.0),
-                                  child: _subCategory(snapshot.data[index].name, snapshot.data[index].imageurl ),
+                                  child: _subCategory(snapshot.data[index].name, snapshot.data[index].imageurl, index ),
                                 ),
                                 //Single Tap
                                 onTap: (){
@@ -141,7 +152,9 @@ class _TabsDemoState extends State<TestFile> {
                                 //Double Tap
                                 onDoubleTap: ()
                                 {
-                                  Icon(Icons.arrow_back_ios_outlined);
+                                  print(index);
+                                  changeText(index);
+                                  //changeText(index);
                                 },
                               );
                             }),
@@ -159,7 +172,7 @@ class _TabsDemoState extends State<TestFile> {
   // Creating Separate
   // Widget Layout
   // For Every Tab
-  Widget _subCategory(String name, String imageUrl)
+  Widget _subCategory(String name, String imageUrl, int index)
   {
 
     return Card(
@@ -182,55 +195,14 @@ class _TabsDemoState extends State<TestFile> {
 
             Padding(
               padding: const EdgeInsets.all(5.0),
-              child: Row(
-                children:<Widget>[
-                  Expanded(
-                    flex: 0,
-                    child: InkWell(
-                        child: Icon(Icons.remove_circle_outline),
-                      onTap:(){
-                        Fluttertoast.showToast(
-                            msg: "Remove",
-                            toastLength: Toast.LENGTH_SHORT,
-                            gravity: ToastGravity.BOTTOM_LEFT,
-                            timeInSecForIosWeb: 1,
-                            backgroundColor: Colors.red,
-                            textColor: Colors.white,
-                            fontSize: 16.0
-                        );
-                      },
-                    ),
-                  ),
-
-
-                  Expanded(
-                    flex: 1,
-                      child: Align(
-                        alignment: Alignment.topRight,
-                        child: InkWell(
-                          onTap: (){
-                            changeText();
-                            Fluttertoast.showToast(
-                                msg: "Add"+count.toString(),
-                                toastLength: Toast.LENGTH_SHORT,
-                                gravity: ToastGravity.BOTTOM_LEFT,
-                                timeInSecForIosWeb: 1,
-                                backgroundColor: Colors.red,
-                                textColor: Colors.white,
-                                fontSize: 16.0
-                            );
-                          },
-                          child:new CircleAvatar(
-                            backgroundColor: Colors.green,
-                            child: new Text('x'+count.toString()),
-                            foregroundColor: Colors.white,
-                          ),
-
-                        ),
-                      )
-                  )
-                ],
-              ),
+              child: Visibility
+                (
+                    //Now addedToCart = Fale
+                    // that's why _removeToCart row
+                    // Will no show
+                    visible: addedToCart == true,
+                    child: _removeToCart(index),
+                ),
             ),
 
             //For Bottom Banner
@@ -273,6 +245,58 @@ class _TabsDemoState extends State<TestFile> {
     );
   }
 
+
+  Widget _removeToCart(int index){
+
+    return Row(
+      children:<Widget>[
+        Expanded(
+          flex: 0,
+          child: InkWell(
+            child: Icon(Icons.remove_circle_outline),
+            onTap:(){
+              remove(index);
+              Fluttertoast.showToast(
+                  msg: "Remove",
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.BOTTOM_LEFT,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
+            },
+          ),
+        ),
+
+        Expanded(
+            flex: 1,
+            child: Align(
+              alignment: Alignment.topRight,
+              child: InkWell(
+                onTap: (){
+                  Fluttertoast.showToast(
+                      msg: "Add"+count.toString(),
+                      toastLength: Toast.LENGTH_SHORT,
+                      gravity: ToastGravity.BOTTOM_LEFT,
+                      timeInSecForIosWeb: 1,
+                      backgroundColor: Colors.red,
+                      textColor: Colors.white,
+                      fontSize: 16.0
+                  );
+                },
+                child:new CircleAvatar(
+                  backgroundColor: Colors.green,
+                  child: new Text('x'+count.toString()),
+                  foregroundColor: Colors.white,
+                ),
+
+              ),
+            )
+        )
+      ],
+    );
+  }
 
 
 }
