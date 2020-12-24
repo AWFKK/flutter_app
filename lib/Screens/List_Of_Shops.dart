@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Grid/Product_Categories.dart';
+import 'package:flutter_app/Screens/Product_Categories.dart';
 import 'package:flutter_app/dataclass/Heros.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;

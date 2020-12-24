@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Grid/TestFile.dart';
+import 'package:flutter_app/Screens/TestFile.dart';
 import 'package:flutter_app/dataclass/Heros.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;

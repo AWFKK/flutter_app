@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Grid/List_Of_Shops.dart';
+import 'package:flutter_app/Screens/List_Of_Shops.dart';
 import 'package:flutter_app/dataclass/Heros.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
