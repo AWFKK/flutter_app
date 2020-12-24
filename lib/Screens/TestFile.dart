@@ -23,6 +23,7 @@ class TestFile extends StatefulWidget {
 class _TabsDemoState extends State<TestFile> {
 
   bool multiple = true;
+  int count = 0;
 
   List<String> categories = ["0","1","2"];
   //Its A faction type
@@ -61,7 +62,12 @@ class _TabsDemoState extends State<TestFile> {
     return listof;
   }
 
+  changeText() {
+    setState(() {
+      count++;
+    });
 
+  }
 
   @override
   void initState() {
@@ -114,6 +120,7 @@ class _TabsDemoState extends State<TestFile> {
                                   padding: const EdgeInsets.all(1.0),
                                   child: _subCategory(snapshot.data[index].name, snapshot.data[index].imageurl ),
                                 ),
+                                //Single Tap
                                 onTap: (){
                                   /*Navigator.push(
                                     context,
@@ -131,17 +138,10 @@ class _TabsDemoState extends State<TestFile> {
                                   fontSize: 16.0);
 
                                 },
+                                //Double Tap
                                 onDoubleTap: ()
                                 {
-                                  Fluttertoast.showToast(
-                                      msg: 'Double Tap',
-                                      //Message For toast
-                                      toastLength: Toast.LENGTH_SHORT,
-                                      gravity: ToastGravity.BOTTOM_LEFT,
-                                      timeInSecForIosWeb: 1,
-                                      backgroundColor: Colors.red,
-                                      textColor: Colors.white,
-                                      fontSize: 16.0);
+                                  Icon(Icons.arrow_back_ios_outlined);
                                 },
                               );
                             }),
@@ -161,57 +161,118 @@ class _TabsDemoState extends State<TestFile> {
   // For Every Tab
   Widget _subCategory(String name, String imageUrl)
   {
-    return Card(
-        semanticContainer: true,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: Container(
-          decoration: BoxDecoration(
-            // border: Border.all(color: Colors.black, width: 0.5),
-            image: DecorationImage(
-                image: NetworkImage(imageUrl),
-                fit: BoxFit.cover,
-                alignment: Alignment.topCenter
-            ),
-          ),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5.0),
-              ),
-              color: Colors.white.withOpacity(0.5),
-              margin: const EdgeInsets.fromLTRB(0,0,0,0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(5,2,0,0),
-                    child: Text(name, style: TextStyle(fontSize: 15)),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(5,0,0,0),
-                    child: Text("Quantity", style: TextStyle(fontSize: 13)),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0,0,5,5),
-                      child: Text("AED:25.00", style: TextStyle(fontSize: 15)),
-                    ),
-                  )
 
+    return Card(
+      semanticContainer: true,
+      clipBehavior: Clip.antiAliasWithSaveLayer,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5.0),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          // border: Border.all(color: Colors.black, width: 0.5),
+          image: DecorationImage(
+              image: NetworkImage(imageUrl),
+              fit: BoxFit.cover,
+              alignment: Alignment.topCenter
+          ),
+        ),
+        child: Column(
+          children:<Widget>[
+
+            Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Row(
+                children:<Widget>[
+                  Expanded(
+                    flex: 0,
+                    child: InkWell(
+                        child: Icon(Icons.remove_circle_outline),
+                      onTap:(){
+                        Fluttertoast.showToast(
+                            msg: "Remove",
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.BOTTOM_LEFT,
+                            timeInSecForIosWeb: 1,
+                            backgroundColor: Colors.red,
+                            textColor: Colors.white,
+                            fontSize: 16.0
+                        );
+                      },
+                    ),
+                  ),
+
+
+                  Expanded(
+                    flex: 1,
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: InkWell(
+                          onTap: (){
+                            changeText();
+                            Fluttertoast.showToast(
+                                msg: "Add"+count.toString(),
+                                toastLength: Toast.LENGTH_SHORT,
+                                gravity: ToastGravity.BOTTOM_LEFT,
+                                timeInSecForIosWeb: 1,
+                                backgroundColor: Colors.red,
+                                textColor: Colors.white,
+                                fontSize: 16.0
+                            );
+                          },
+                          child:new CircleAvatar(
+                            backgroundColor: Colors.green,
+                            child: new Text('x'+count.toString()),
+                            foregroundColor: Colors.white,
+                          ),
+
+                        ),
+                      )
+                  )
                 ],
               ),
-            )
-          ),
+            ),
+
+            //For Bottom Banner
+            Expanded(child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  color: Colors.white.withOpacity(0.5),
+                  margin: const EdgeInsets.fromLTRB(0,0,0,0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5,2,0,0),
+                        child: Text(name, style: TextStyle(fontSize: 15)),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(5,0,0,0),
+                        child: Text("Quantity", style: TextStyle(fontSize: 13)),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(0,0,5,5),
+                          child: Text("AED:25.00", style: TextStyle(fontSize: 15)),
+                        ),
+                      )
+
+                    ],
+                  ),
+                )
+            ),)
+          ],
         ),
+      ),
 
     );
   }
 
-  
+
+
 }

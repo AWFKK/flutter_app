@@ -59,7 +59,7 @@ class _HomeState extends State<Home> {
           new Container(
               margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: RaisedButton(
-                  child: Text('Test File'),
+                  child: Text('Tabs'),
                   textColor: Colors.white,
                   color: HexColor('#D91400'),
                   padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
