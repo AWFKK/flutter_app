@@ -24,11 +24,16 @@ class _TabsDemoState extends State<TestFile> {
 
   bool multiple = true;
   int count = 0;
-  int a ;
+
 
   bool addedToCart = false;
 
   List<String> categories = ["0","1","2"];
+
+  //Selected Data
+  List<Heros> _selectedItems = [] ;
+  //Getting Data From Json
+  List<Heros> listof = [];
   //Its A faction type
   // User to retrieve
   // data from server
@@ -44,7 +49,7 @@ class _TabsDemoState extends State<TestFile> {
     //Response Data Into Json Format
     var JsonData = json.decode(data.body);
 
-    List<Heros> listof = [];
+
     for (var i in JsonData) {
       Heros data = new Heros(
           i["name"],
@@ -65,17 +70,11 @@ class _TabsDemoState extends State<TestFile> {
     return listof;
   }
 
-  changeText(int index) {
-    setState(() {
-      count++;
-      addedToCart = true;
-    });
-  }
-
   remove(int index) {
     setState(() {
       count = 0;
       addedToCart = false;
+      _selectedItems.removeAt(index);
     });
   }
 
@@ -126,36 +125,27 @@ class _TabsDemoState extends State<TestFile> {
                           return GridView.count(
                               crossAxisCount: 2,
                               children: List.generate(snapshot.data.length, (index) {
-                              return InkWell(
+                              return GestureDetector(
+
+                                onTap: (){
+                                  setState(() {
+                                    _selectedItems.add(snapshot.data[index]);
+                                    count++;
+                                  });
+                                },
+
+                                onDoubleTap: (){
+                                  setState(() {
+                                    print(_selectedItems.length);
+                                  });
+                                },
                                 child: Padding(
                                   padding: const EdgeInsets.all(1.0),
-                                  child: _subCategory(snapshot.data[index].name, snapshot.data[index].imageurl, index ),
-                                ),
-                                //Single Tap
-                                onTap: (){
-                                  /*Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) =>
-                                        TestFile()), // Passing Intent With InputString
-                                  );*/
-                                  Fluttertoast.showToast(
-                                  msg: snapshot.data[index].name,
-                                  //Message For toast
-                                  toastLength: Toast.LENGTH_SHORT,
-                                  gravity: ToastGravity.BOTTOM_LEFT,
-                                  timeInSecForIosWeb: 1,
-                                  backgroundColor: HexColor('#D91400'),
-                                  textColor: Colors.white,
-                                  fontSize: 16.0);
 
-                                },
-                                //Double Tap
-                                onDoubleTap: ()
-                                {
-                                  print(index);
-                                  changeText(index);
-                                  //changeText(index);
-                                },
+                                  child: _subCategory(snapshot.data[index].name, snapshot.data[index].imageurl,
+                                      index, _selectedItems.contains(snapshot.data[index])
+                                  ),
+                                ),
                               );
                             }),
                           );
@@ -172,7 +162,7 @@ class _TabsDemoState extends State<TestFile> {
   // Creating Separate
   // Widget Layout
   // For Every Tab
-  Widget _subCategory(String name, String imageUrl, int index)
+  Widget _subCategory(String name, String imageUrl, int index, bool _isSelected)
   {
 
     return Card(
@@ -200,7 +190,7 @@ class _TabsDemoState extends State<TestFile> {
                     //Now addedToCart = Fale
                     // that's why _removeToCart row
                     // Will no show
-                    visible: addedToCart == true,
+                    visible: _isSelected == true,
                     child: _removeToCart(index),
                 ),
             ),
