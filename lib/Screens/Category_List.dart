@@ -67,7 +67,7 @@ class _GridState extends State<Grid> {
             }else
               {
                 return StaggeredGridView.countBuilder(
-                  crossAxisCount: 4,
+                  crossAxisCount:4,
                   itemCount: 19,
                   // itemCount: snapshot.data.length,
                   itemBuilder: (BuildContext context, int index) => new GestureDetector(
@@ -116,7 +116,7 @@ class _GridState extends State<Grid> {
                     ),
                   ),
                   staggeredTileBuilder: (int index) =>
-                  new StaggeredTile.count(2, index.isEven ? 2 : 1),
+                  new StaggeredTile.count(2, index.isEven ? 3 : 1 ),
                   mainAxisSpacing: 4.0,
                   crossAxisSpacing: 4.0,
                 );

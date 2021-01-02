@@ -119,7 +119,8 @@ class _ShopListState extends State<ShopList> {
               ),
             ),
           ),
-          new Container(
+          //For List View
+          Container(
             margin: EdgeInsets.all(10.0),
             height: 560,
             child: new FutureBuilder(

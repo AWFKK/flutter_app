@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/List_Of_Shops.dart';
+import 'package:flutter_app/Screens/listview_note.dart';
 import 'Screens/Grid.dart';
 import 'ShopList.dart';
 import 'file:///C:/Users/Faiz/Desktop/Projects/flutter_app/lib/WebService/FatchData.dart';
@@ -150,6 +150,25 @@ class _HomeState extends State<Home> {
                       context,
                       MaterialPageRoute(builder: (context) =>
                           MyApp()), // Passing Intent With InputString
+                    );
+                  }
+              )
+          ),
+
+          //SQL Lite
+          new Container(
+              margin: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: RaisedButton(
+                  child: Text('SQL Lite'),
+                  textColor: Colors.white,
+                  color: HexColor('#D91400'),
+                  padding: EdgeInsets.fromLTRB(12, 12, 12, 12),
+                  onPressed: () {
+                    //Intent Next Activity
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) =>
+                          ListViewNote()), // Passing Intent With InputString
                     );
                   }
               )
