@@ -11,8 +11,13 @@ class DatabaseHelper {
 
   final String tableNote = 'noteTable';
   final String columnId = 'id';
-  final String columnTitle = 'title';
-  final String columnDescription = 'description';
+  final String columnUser_ID = 'userid';
+  final String columnStore_ID = 'storeid';
+  final String columnTotal_Quantity = 'totalQuantity';
+  final String columnUnit_Price = 'unitPrice';
+  final String columnPrice = 'price';
+  final String columnDiccount = 'dicount';
+  final String columnUnit = 'unit';
 
   static Database _db;
 
@@ -39,7 +44,7 @@ class DatabaseHelper {
 
   void _onCreate(Database db, int newVersion) async {
     await db.execute(
-        'CREATE TABLE $tableNote($columnId INTEGER PRIMARY KEY, $columnTitle TEXT, $columnDescription TEXT)');
+        'CREATE TABLE $tableNote($columnId INTEGER PRIMARY KEY, $columnUser_ID TEXT, $columnStore_ID TEXT, $columnTotal_Quantity TEXT, $columnUnit_Price TEXT, $columnPrice TEXT, $columnDiccount TEXT , $columnUnit TEXT )');
   }
 
   Future<int> saveNote(Note note) async {
@@ -53,7 +58,15 @@ class DatabaseHelper {
 
   Future<List> getAllNotes() async {
     var dbClient = await db;
-    var result = await dbClient.query(tableNote, columns: [columnId, columnTitle, columnDescription]);
+    var result = await dbClient.query(tableNote, columns: [columnId,
+      columnUser_ID,
+      columnStore_ID,
+      columnTotal_Quantity,
+      columnUnit_Price,
+      columnPrice,
+      columnDiccount,
+      columnUnit
+    ]);
 //    var result = await dbClient.rawQuery('SELECT * FROM $tableNote');
 
     return result.toList();
@@ -67,7 +80,15 @@ class DatabaseHelper {
   Future<Note> getNote(int id) async {
     var dbClient = await db;
     List<Map> result = await dbClient.query(tableNote,
-        columns: [columnId, columnTitle, columnDescription],
+        columns: [columnId,
+          columnUser_ID,
+          columnStore_ID,
+          columnTotal_Quantity,
+          columnUnit_Price,
+          columnPrice,
+          columnDiccount,
+          columnUnit
+        ],
         where: '$columnId = ?',
         whereArgs: [id]);
 //    var result = await dbClient.rawQuery('SELECT * FROM $tableNote WHERE $columnId = $id');

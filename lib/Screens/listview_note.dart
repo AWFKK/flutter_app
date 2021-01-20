@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/Screens/note_screen.dart';
 import 'package:flutter_app/database/database_helper.dart';
 import 'package:flutter_app/dataclass/note.dart';
 
@@ -45,14 +44,14 @@ class _ListViewNoteState extends State<ListViewNote> {
                   children: <Widget>[
                     ListTile(
                       title: Text(
-                        '${items[position].title}',
+                        '${items[position].userid}',
                         style: TextStyle(
                           fontSize: 22.0,
                           color: Colors.deepOrangeAccent,
                         ),
                       ),
                       subtitle: Text(
-                        '${items[position].description}',
+                        '${items[position].storid}',
                         style: new TextStyle(
                           fontSize: 18.0,
                           fontStyle: FontStyle.italic,
@@ -92,7 +91,7 @@ class _ListViewNoteState extends State<ListViewNote> {
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: (){
-            db.saveNote(Note('B','a'));
+            db.saveNote(Note('57','45','1','10.0','10.0','0.0','1'));
             setState(() {
               items.clear();
               db.getAllNotes().then((notes) {
@@ -123,8 +122,8 @@ class _ListViewNoteState extends State<ListViewNote> {
     if (items[position] != null) {
       db.updateNote(Note.fromMap({
         'id': items[position].id,
-        'title': 'Updated',
-        'description': 'Description'
+        'userid': 'Updated',
+        'storid': 'Description'
       }));
       db.getAllNotes().then((notes) {
         setState(() {
